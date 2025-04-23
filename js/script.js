@@ -14,21 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <a href="${project.github}" target="_blank" class="btn-link">
                         <i class="fab fa-github"></i> Código
                     </a>
-                    <a href="#" class="btn-link btn-demo">
+                    <a href="${project.showProject}" target="_blank" class="btn-link">
                         <i class="fas fa-external-link-alt"></i> Visualizar Projeto
                     </a>
                 </div>
             </div>
         `;
-
-        const demoBtn = projectCard.querySelector('.btn-demo');
-        demoBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (project.images?.length) {
-                openImageModal(project.images);
-            }
-        });
-
         projectsContainer.appendChild(projectCard);
     });
 
@@ -44,38 +35,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-let currentImages = [];
-let currentIndex = 0;
-
-const modal = document.getElementById("image-modal");
-const modalImg = document.getElementById("modal-image");
-const closeModal = document.getElementById("close-modal");
-const prevBtn = document.getElementById("prev-image");
-const nextBtn = document.getElementById("next-image");
-
-// Função para abrir modal com imagens
-function openImageModal(images) {
-    currentImages = images;
-    currentIndex = 0;
-    modalImg.src = currentImages[currentIndex];
-    modal.style.display = "flex";
-}
-
-// Navegação
-prevBtn.onclick = () => {
-    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    modalImg.src = currentImages[currentIndex];
-};
-
-nextBtn.onclick = () => {
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    modalImg.src = currentImages[currentIndex];
-};
-
-// Fechar modal
-closeModal.onclick = () => {
-    modal.style.display = "none";
-};
 
 emailjs.init('sQYUTJvYCXRjTzXOh');
